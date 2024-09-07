@@ -25,7 +25,7 @@ jobs:
       - name: Merge branch into main
         run: |
           git checkout main
-          git merge ${{ github.ref }} --no-ff --strategy-option theirs
+          git merge ${{ github.ref }} --no-ff --allow-unrelated-histories --strategy-option theirs
 
       - name: Push changes to main
         run: |
