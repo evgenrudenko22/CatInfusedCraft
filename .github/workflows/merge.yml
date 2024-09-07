@@ -25,7 +25,11 @@ jobs:
       - name: Merge branch into main
         run: |
           git checkout main
-          git merge ${{ github.ref }}
+          git merge ${{ github.ref }} --no-ff --strategy-option theirs
 
       - name: Push changes to main
-        run: git push origin main
+        run: |
+          git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ git.repository }}
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
